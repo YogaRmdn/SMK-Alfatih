@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
@@ -34,10 +36,14 @@
     --color-accent-900: #78350f;
 
     --color-surface: #f8fafc;
+    --color-surface-dark: #0f172a;
     --color-ink: #0f172a;
+    --color-ink-dark: #e2e8f0;
 
     --shadow-card: 0 1px 2px 0 rgb(15 23 42 / 0.06), 0 1px 3px 0 rgb(15 23 42 / 0.1);
+    --shadow-card-dark: 0 1px 2px 0 rgb(0 0 0 / 0.3), 0 1px 3px 0 rgb(0 0 0 / 0.4);
     --shadow-card-hover: 0 4px 6px -1px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.08);
+    --shadow-card-hover-dark: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
     --shadow-soft: 0 8px 30px rgb(15 23 42 / 0.08);
     --shadow-pop: 0 10px 40px -5px rgb(15 23 42 / 0.18);
 
@@ -51,6 +57,12 @@
 
     body {
         @apply bg-surface text-ink antialiased;
+        transition: background-color 0.2s, color 0.2s;
+    }
+
+    .dark body,
+    .dark {
+        @apply bg-surface-dark text-ink-dark;
     }
 
     ::selection {
@@ -60,6 +72,11 @@
     :focus-visible {
         outline: 2px solid var(--color-primary-600);
         outline-offset: 2px;
+    }
+
+    button:not(:disabled),
+    [role='button']:not(:disabled) {
+        cursor: pointer;
     }
 }
 
@@ -76,6 +93,98 @@
 
 .animate-toast-in {
     animation: toast-in 0.25s ease-out both;
+}
+
+@layer components {
+    .prose-content {
+        @apply text-[15px] leading-relaxed text-slate-700;
+    }
+
+    .dark .prose-content {
+        @apply text-slate-300;
+    }
+
+    .prose-content > h2,
+    .prose-content > h3 {
+        @apply mt-8 mb-3 font-bold tracking-tight text-slate-900;
+    }
+
+    .dark .prose-content > h2,
+    .dark .prose-content > h3 {
+        @apply text-white;
+    }
+
+    .prose-content > h2 {
+        @apply text-xl;
+    }
+
+    .prose-content > h3 {
+        @apply text-lg;
+    }
+
+    .prose-content > p {
+        @apply mt-3;
+    }
+
+    .prose-content > p:first-child {
+        @apply mt-0;
+    }
+
+    .prose-content ul {
+        @apply mt-4 space-y-2;
+    }
+
+    .prose-content ul > li {
+        @apply relative pl-6;
+    }
+
+    .prose-content ul > li::before {
+        content: '';
+        @apply absolute left-0 top-[0.55em] size-1.5 rounded-full bg-primary-500;
+    }
+
+    .prose-content > ul:first-child {
+        @apply mt-0;
+    }
+
+    .prose-content strong {
+        @apply font-semibold text-slate-900;
+    }
+
+    .dark .prose-content strong {
+        @apply text-white;
+    }
+}
+
+@keyframes toast-slide-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toast-slide-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes toast-progress {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {

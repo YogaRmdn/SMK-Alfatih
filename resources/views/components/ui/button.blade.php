@@ -10,9 +10,9 @@
 @php
     $variants = [
         'primary' => 'bg-primary-600 text-white hover:bg-primary-700 shadow-sm focus-visible:outline-primary-600',
-        'secondary' => 'bg-primary-50 text-primary-700 border border-primary-200 hover:bg-primary-100 focus-visible:outline-primary-500',
-        'outline' => 'bg-white text-slate-700 border border-slate-300 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-slate-400 shadow-sm',
-        'ghost' => 'bg-transparent text-slate-600 hover:bg-slate-100 focus-visible:outline-slate-400',
+        'secondary' => 'bg-primary-50 text-primary-700 border border-primary-200 hover:bg-primary-100 focus-visible:outline-primary-500 dark:bg-primary-950 dark:text-primary-400 dark:border-primary-800 dark:hover:bg-primary-900',
+        'outline' => 'bg-white text-slate-700 border border-slate-300 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-slate-400 shadow-sm dark:bg-transparent dark:text-slate-300 dark:border-slate-600 dark:hover:border-slate-500 dark:hover:bg-slate-800',
+        'ghost' => 'bg-transparent text-slate-600 hover:bg-slate-100 focus-visible:outline-slate-400 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white',
         'danger' => 'bg-red-600 text-white hover:bg-red-700 shadow-sm focus-visible:outline-red-600',
         'accent' => 'bg-accent-500 text-white hover:bg-accent-600 shadow-sm focus-visible:outline-accent-500',
     ];

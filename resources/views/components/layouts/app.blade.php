@@ -17,6 +17,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        @if(session('success'))<meta name="flash-success" content="{{ session('success') }}">@endif
+        @if(session('error'))<meta name="flash-error" content="{{ session('error') }}">@endif
+        @if(session('warning'))<meta name="flash-warning" content="{{ session('warning') }}">@endif
+        @if(session('info'))<meta name="flash-info" content="{{ session('info') }}">@endif
+
+        <script>
+            (function() {
+                const saved = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (saved === 'dark' || (!saved && prefersDark)) {
+                    document.documentElement.classList.add('dark');
+                }
+            })();
+        </script>
 
         <title>{{ $pageTitle }}</title>
         <meta name="description" content="{{ $metaDescription }}">
@@ -31,6 +45,8 @@
 
         <meta name="theme-color" content="#047857">
 
+        <link rel="icon" type="image/png" href="{{ asset('img/logo.png') }}">
+
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=plus-jakarta-sans:400,500,600,700,800" rel="stylesheet" />
 
@@ -38,7 +54,7 @@
         @stack('head')
     </head>
 
-    <body class="flex min-h-screen flex-col {{ $bodyClass }}">
+    <body class="flex min-h-screen flex-col bg-white dark:bg-slate-950 dark:text-slate-200 {{ $bodyClass }}">
         @include('partials.navbar')
 
         <main id="main-content" class="flex-1">
